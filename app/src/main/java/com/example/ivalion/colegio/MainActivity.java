@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 //Recorro el cursor hasta que no haya más registros
                 do {
                     //Guardo los valores en un array que guardare en un arraylist
-                    String[] asdf = {c.getString(0) + ": ", c.getString(1), c.getString(2), c.getString(3), "" + c.getInt(4), "" + c.getInt(5)};
+                    String[] asdf = {c.getString(0) + ":", c.getString(1), c.getString(2), c.getString(3), "" + c.getInt(4), "" + c.getInt(5)};
 
                     datos.add(asdf);
                     b.putStringArray("" + contador, asdf);
