@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.ivalion.colegio.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Insertar"
+        android:id="@+id/tv_insert"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_insert"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout3">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estudiante"
+            android:id="@+id/btn_estu_insert"
+            android:layout_below="@+id/btn_ver"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_ver_estu"
+            android:src="@drawable/ver"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profesor"
+            android:id="@+id/btn_prof_insert"
+            android:layout_alignBaseline="@+id/tv_borrar"
+            android:layout_alignBottom="@+id/tv_borrar"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_ver_prof"
+            android:src="@drawable/ver" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Borrar"
+        android:id="@+id/tv_borrar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Base de datos"
+        android:id="@+id/btn_borrar_db"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_ver"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/ver"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_borrar"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estudiante"
+            android:id="@+id/btn_estu_borrar"
+            android:layout_below="@+id/tv_borrar"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom|center_vertical" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estudiantes"
+            android:id="@+id/btn_estus_borrar"
+            android:layout_below="@+id/tv_borrar"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical"
+        android:id="@+id/linearLayout2"
+        android:layout_marginTop="5dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profesor"
+            android:id="@+id/btn_prof_borrar"
+            android:gravity="center_vertical"
+            android:layout_alignTop="@+id/btn_borrar_db"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profesores"
+            android:id="@+id/btn_profs_borrar"
+            android:gravity="center_vertical"
+            android:layout_alignTop="@+id/btn_borrar_db"
+            android:layout_alignParentStart="true" />
+    </LinearLayout>
+
+</RelativeLayout>
