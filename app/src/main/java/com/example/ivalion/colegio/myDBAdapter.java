@@ -6,8 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -79,15 +78,15 @@ public class myDBAdapter {
         return c;
     }
 
-    public boolean deleteEstudiante(int id) {
+    public boolean delete(int id, boolean eleccion) {
 
-        //al borrar solo un unico id, el metodo delete debe devolver 1
-        if (db.delete(DATABASE_TABLE_ESTU, "_id=" + id, null) == 1)
-            return true;
-        else
-            return false;
+        //al borrar solo un unico id, el metodo delete debe devolver true
+        if (eleccion) {
+            return db.delete(DATABASE_TABLE_ESTU, "_id=" + id, null) == 1;
+        } else {
+            return db.delete(DATABASE_TABLE_PROF, "_id=" + id, null) == 1;
+        }
     }
-
 
     public void insertarProfesores(String nom, String cic, String cur, String des, int ed) {
 
@@ -107,7 +106,7 @@ public class myDBAdapter {
         return c;
     }
 
-    public void vaciarTabla(String tabla, View view) {
+    public void vaciarTabla(String tabla) {
         //metodo que intenta borrar y recrear una tabla en funcion de la tabla introducia por parametro
         try {
 
@@ -123,7 +122,7 @@ public class myDBAdapter {
                     Toast.makeText(context, "Se ha vaciado " + DATABASE_TABLE_PROF, Toast.LENGTH_SHORT).show();
                     break;
                 case "Armaggedon":
-                    dbHelper.onUpgrade(db,1,1);
+                    dbHelper.onUpgrade(db, 1, 1);
                     break;
                 default:
                     Toast.makeText(context, "No se ha seleccionado ninguna tabla", Toast.LENGTH_SHORT).show();
@@ -134,9 +133,37 @@ public class myDBAdapter {
         }
     }
 
+    public Cursor[] filtrar(String curso, String ciclo) {
+        Cursor[] c = new Cursor[2];
+        if (curso != null && ciclo != null) {
+            //busco por curso y ciclo
+            c[0] = db.rawQuery(
+                    "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_PROF + " WHERE " + "curso='" + curso + "' AND ciclo='" + ciclo + "'", null);
+            Log.i("asdf", "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_PROF + " WHERE " + "curso='" + curso + "' AND ciclo='" + ciclo + "'");
+            c[1] = db.rawQuery(
+                    "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_ESTU + " WHERE " + "curso='" + curso + "' AND ciclo='" + ciclo + "'", null);
+        } else if (curso != null) {
+            //busco por curso
+            c[0] = db.rawQuery(
+                    "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_PROF + " WHERE " + "curso='" + curso + "'", null);
+            Log.i("asdf", "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_PROF + " WHERE " + "curso='" + curso + "'", null);
+            c[1] = db.rawQuery(
+                    "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_ESTU + " WHERE " + "curso='" + curso + "'", null);
+        } else {
+            //busco por ciclo
+            c[0] = db.rawQuery(
+                    "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_PROF + " WHERE " + "ciclo='" + ciclo + "'", null);
+            Log.i("asdf", "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_PROF + " WHERE " + "curso='" + curso + "'", null);
+            c[1] = db.rawQuery(
+                    "SELECT " + "_id," + "nombre " + "FROM " + DATABASE_TABLE_ESTU + " WHERE " + "ciclo='" + ciclo + "'", null);
+        }
+        return c;
+    }
+
     private static class MyDbHelper extends SQLiteOpenHelper {
         //contexto necesario para el toast de "onUpgrade"
         Context c;
+
         public MyDbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
             c = context;

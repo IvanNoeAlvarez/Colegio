@@ -8,13 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class DelEstudiante extends AppCompatActivity {
+public class Eliminar extends AppCompatActivity {
     EditText id;
     Button borrar;
+    Bundle b;
+    Intent i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_del_estudiante);
+        setContentView(R.layout.activity_delete);
+
+        i = getIntent();
 
         id = (EditText)findViewById(R.id.et_id);
         borrar = (Button)findViewById(R.id.btn_borrar);
@@ -22,7 +27,7 @@ public class DelEstudiante extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (id.getText().toString().isEmpty())
-                    Toast.makeText(DelEstudiante.this, "Introduce un ID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Eliminar.this, "Introduce un ID", Toast.LENGTH_SHORT).show();
                 else{
                     Bundle b = new Bundle();
                     Intent i = new Intent();
@@ -34,6 +39,13 @@ public class DelEstudiante extends AppCompatActivity {
 
             }
         });
+
+
+        if (i.getExtras().getBoolean("eleccion")==false)
+            id.setHint("Id Profesor");
+        else
+            id.setHint("Id Estudiante");
+
 
     }
 }
