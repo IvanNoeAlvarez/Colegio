@@ -58,7 +58,7 @@ public class Insertar extends AppCompatActivity {
                     b.putString("ciclo", ciclo.getText().toString());
 
                     //verifico qué layout esta visible
-                    if (ll_estudiante.getVisibility() == View.VISIBLE)
+                    if (ll_estudiante.getVisibility() != View.GONE)
                         b.putInt("nota", Integer.parseInt(nota.getText().toString()));
                     else
                         b.putString("despacho", despacho.getText().toString());

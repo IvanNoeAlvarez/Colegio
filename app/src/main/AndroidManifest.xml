@@ -18,7 +18,8 @@
         <activity android:name=".Insertar" />
         <activity android:name=".VerEstudiantesOProfesores" />
         <activity android:name=".Eliminar" />
-        <activity android:name=".CursoOCiclo"></activity>
+        <activity android:name=".CursoOCiclo" />
+        <activity android:name=".VerUno"></activity>
     </application>
 
 </manifest>

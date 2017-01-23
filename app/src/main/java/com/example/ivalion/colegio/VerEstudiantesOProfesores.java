@@ -33,23 +33,22 @@ public class VerEstudiantesOProfesores extends AppCompatActivity {
 
 
         datos = new ArrayList<>();
-        if(i.getExtras().getInt("separador")!=0)
-            datos.add("Estudiantes");
+        if (i.getExtras().getInt("separador") != 0)
+            datos.add("ESTUDIANTES");
 
         for (int n = 0; n < i.getIntExtra("contador", 0); n++) {
-            if ((i.getExtras().getInt("separador")==n)&&(i.getExtras().getInt("separador")!=0)){
-                datos.add("Profesores");
+            if ((i.getExtras().getInt("separador") == n) && (i.getExtras().getInt("separador") != 0)) {
+                datos.add("PROFESORES");
             }
             //Estructura del array: id nombre curso ciclo nota/despacho edad
             String[] contenido = i.getExtras().getStringArray("" + n);
             if (contenido != null) {
                 String str = "";
-                for (int z = 0;z<contenido.length;z++){
-                    str = str.concat(contenido[z]+"_");
+                for (int z = 0; z < contenido.length; z++) {
+                    str = str.concat(contenido[z] + "_");
                 }
-                str = str.substring(0,str.length()-1);
+                str = str.substring(0, str.length() - 1);
                 datos.add(str);
-                //datos.add(contenido[0] + "_" + contenido[1] + "_" + contenido[2] + "_" + contenido[3] + "_" + contenido[4] + "_" + contenido[5]);
             }
 
         }
@@ -96,16 +95,20 @@ public class VerEstudiantesOProfesores extends AppCompatActivity {
 
         builder.setPositiveButton("Modificar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int i) {
+                int id = Integer.parseInt(datosSeparados[0].substring(0, datosSeparados[0].length() - 1));//el ultimo char en el ID es ':'
 
             }
         });
-        builder.setNeutralButton("Eliminar", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Ver", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialogInterface, int i) {
-                int id = Integer.parseInt(datosSeparados[0].substring(0, datosSeparados[0].length() - 1));
-
+                Bundle b = new Bundle();
+                Intent in = new Intent(getApplicationContext(),VerUno.class);
+                datosSeparados[0] = datosSeparados[0].substring(0, datosSeparados[0].length() - 1);//el ultimo char en el ID es ':'
+                b.putStringArray("datos",datosSeparados);
+                in.putExtras(b);
+                startActivity(in);
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
     }

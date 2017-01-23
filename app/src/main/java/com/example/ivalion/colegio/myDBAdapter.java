@@ -89,7 +89,7 @@ public class myDBAdapter {
     }
 
     public void insertarProfesores(String nom, String cic, String cur, String des, int ed) {
-
+        Log.i("asdf",des);
         ContentValues newValues = new ContentValues();
 
         newValues.put(NOMBRE, nom);

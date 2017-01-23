@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         armageddon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                dbAdapter.vaciarTabla("Armaggedon");
             }
         });
 
@@ -195,7 +194,6 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     if (dbAdapter.delete(data.getExtras().getInt("id"), false))
                         Toast.makeText(MainActivity.this, "Profesor eliminado", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(MainActivity.this, "hola", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case FILTRO:
@@ -233,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         //int que registra cuantos estudiantes hay, para poner un separador
-        b.putInt("separador",contador);
+        b.putInt("separador", contador);
         if (cursor[0] != null) {
             if (cursor[0].moveToFirst()) {
                 //Recorro el cursor hasta que no haya más registros
@@ -273,9 +271,17 @@ public class MainActivity extends AppCompatActivity {
                 //Recorro el cursor hasta que no haya más registros
                 do {
                     //Guardo los valores en un array que guardare en un arraylist
-                    String[] asdf = {c.getString(0) + ":", c.getString(1), c.getString(2), c.getString(3), "" + c.getInt(4), "" + c.getInt(5)};
+                    String asdf[]=null;
+                    //creo asdf2 por que no me deja inicializar el array
+                    if (eleccion) {
+                        String [] asdf2 = {c.getString(0) + ":", c.getString(1), c.getString(2), c.getString(3), "" + c.getInt(4), "" + c.getInt(5)};
+                        asdf = asdf2;
+                    }else{
+                       String[] asdf2 = {c.getString(0) + ":", c.getString(1), c.getString(2), c.getString(3), c.getString(4), "" + c.getInt(5)};
+                        asdf= asdf2;
+                    }
 
-                    datos.add(asdf);
+                        datos.add(asdf);
                     b.putStringArray("" + contador, asdf);
 
                     contador++;
@@ -297,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
         int contador = 0;
         ArrayList<String[]> datos = new ArrayList<String[]>();
 
+
         if (estudiantes != null) {
             if (estudiantes.moveToFirst()) {
                 //Recorro el cursor hasta que no haya más registros
@@ -317,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
                 //Recorro el cursor hasta que no haya más registros
                 do {
                     //Guardo los valores en un array que guardare en un arraylist
-                    String[] asdf = {profesores.getString(0) + ":", profesores.getString(1), profesores.getString(2), profesores.getString(3), "" + profesores.getInt(4), "" + profesores.getInt(5)};
+                    String[] asdf = {profesores.getString(0) + ":", profesores.getString(1), profesores.getString(2), profesores.getString(3), profesores.getString(4), "" + profesores.getInt(5)};
 
                     datos.add(asdf);
                     b.putStringArray("" + contador, asdf);
